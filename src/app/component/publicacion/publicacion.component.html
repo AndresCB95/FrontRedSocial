@@ -1,0 +1,56 @@
+
+<section class="vh-50">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="card" style="width: 100rem;">
+            <h5>Publicar</h5>
+            <div class="card-body">
+            <h5 class="card-title"><input type="text" [formControl]='title' id="form3Example3" class="form-control form-control-lg"
+                placeholder="Titulo publicacion" /></h5>
+            <p class="card-text"><textarea class="form-control"  [formControl]='body' id="exampleFormControlTextarea1" rows="3"></textarea></p>
+            <button type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                (click)="publicar()" [disabled]="disable">Publicar</button>
+        </div>
+        </div>
+      </div>
+    </div>
+</section>
+<section class="vh-40">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        
+        <div class="card" style="width: 100rem;">
+            <div class="card-body">
+            <h5 class="card-title">MURO PUBLICACIONES</h5>
+            </div>
+        </div>
+        <div *ngFor="let item of publicaciones; let i = index" style="width: 100rem;">
+            <div class="card" style="width: 100rem; " *ngIf="!disable_editar">
+                <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{item.last_update}}</h6>
+                <p class="card-text">{{item.body}}</p>
+                <button type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                (click)="editar(item.id_publicacion, item.body, item.title)" [disabled]="disable_editar">Editar</button>
+                <button type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                (click)="eliminar(item.id_publicacion)" >Eliminar</button>
+                </div>
+            </div>
+            <div class="card" style="width: 100rem;" *ngIf="editar_num === item.id_publicacion">
+                <div class="card-body">
+                    <h5 class="card-title"><input type="text" [formControl]='title_edit' id="form3Example3" class="form-control form-control-lg"
+                        placeholder="Titulo publicacion" /></h5>
+                    <p class="card-text"><textarea class="form-control"  [formControl]='body_edit' id="exampleFormControlTextarea1" rows="3"></textarea></p>
+                    
+                <button *ngIf="disable_editar" type="button" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                (click)="guardar()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
